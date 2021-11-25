@@ -30,7 +30,11 @@ npm init --y
 
 Open the project folder in your favorite editor and create a new file `app.js` in the project root folder and add the following code:
 
-<script src="https://gist.github.com/tannerabread/55c59df564c0ccb64a18aa2c05dae2fc.js"></script>
+```js
+process.argv.forEach((val, index) => {
+  console.log(`${index}: ${val}`)
+})
+```
 
 Now in the command line type:
 ```bash
@@ -185,7 +189,44 @@ Add: 10 + 3 = 13
 ### End Results
 
 If you followed everything in this tutorial, your end product should look as follows:
-<script src="https://gist.github.com/tannerabread/29b175266d84acfb93abd084aa3b94fa.js"></script>
+
+```js
+// process object built into node.js
+// has the argv property to retrieve arguments from the command line
+// first element is full path of the node command
+// second element is full path of file being executed
+// all additional arguments are present from third element onwards
+process.argv.forEach((val, index) => {
+  console.log(`${index}: ${val}`)
+})
+
+// get rid of the first two arguments as they are not needed in further processing
+const args = process.argv.slice(2)
+console.log('args', args)
+
+// parse arguments into an object with key:value pairs
+let argsObj = {}
+for (let i = 0; i < args.length; i++) {
+  let current = args[i].split('=')
+  let key = current[0]
+  let value = current[1]
+  argsObj[key] = value
+}
+console.log('argsObj', argsObj)
+
+// do math with the values passed in
+if (argsObj.num1 && argsObj.num2) {
+  let num1 = argsObj.num1, num2 = argsObj.num2
+  console.log(`Add: ${num1} + ${num2} = ${num1 + num2}`)
+  console.log(`Subtract: ${num1} - ${num2} = ${num1 - num2}`)
+  console.log(`Multiply: ${num1} * ${num2} = ${num1 * num2}`)
+  console.log(`Divide: ${num1} / ${num2} = ${num1 / num2}`)
+  console.log(`Remainder: ${num1} % ${num2} = ${num1 % num2}`)
+
+  console.log('typeof num1, num2', typeof num1, typeof num2)
+  console.log(`Add: ${num1} + ${num2} = ${parseInt(num1) + parseInt(num2)}`)
+}
+```
 
 The resulting console log will look like:
 ```bash
@@ -219,7 +260,22 @@ In `package.json`, change the `"main"` key to point to `app.js` instead of `inde
 ```
 
 Your resulting file should be similar to the following
-<script src="https://gist.github.com/tannerabread/5f42a90b511d5e1e73fd1c4164b53b7d.js"></script>
+
+```json
+{
+  "name": "node_file_arguments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
 
 ### New Command, New Logs
 
