@@ -36,6 +36,9 @@ process.argv.forEach((val, index) => {
 })
 ```
 
+This uses the previously mentioned `process` object and also the [`console`](https://nodejs.org/api/console.html) object, which is similar to the browser's `console.log()` but with a few extra features.
+Check out ***this*** post for more about the console object
+
 Now in the command line type:
 ```bash
 node app.js one two=three four=five

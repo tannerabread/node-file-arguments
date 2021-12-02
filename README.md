@@ -35,3 +35,15 @@ Remainder: 10 % 3 = 1
 typeof num1, num2 string string
 Add: 10 + 3 = 13
 ```
+
+# Console Object
+
+This is a continuation of the arguments from command line repo within the same repo to save from having thousands of repos.
+
+## Get Started
+
+```bash
+node console.js
+# or
+npm console
+```
